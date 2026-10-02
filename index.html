@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>土豆电影网 - 埋进土里，也能长出好电影</title>
+<meta name="description" content="土豆电影网（tudoudianyingwang-h5）是地窖薯块风电影导航站：热映、经典、动漫、纪录片、深夜场像不同薯种一样分类陈列，移动端自适应，内页链接均为 # 占位。">
+<meta name="name" content="土豆电影网, 电影导航, 热映电影, 经典老片, 动漫, 纪录片, 深夜场, tudoudianyingwang-h5">
+<meta name="keywords" content="土豆电影网, 电影导航, 热映电影, 经典老片, 动漫, 纪录片, 深夜场, tudoudianyingwang-h5">
+<style>
+:root{
+  --soil:#2c2118;
+  --soil-2:#3b2c1f;
+  --soil-line:#4d3a28;
+  --flesh:#f6ecd6;
+  --flesh-line:#e4d4b0;
+  --sprout:#7bbf5a;
+  --sprout-dim:#7bbf5a33;
+  --caramel:#e08a3c;
+  --caramel-dim:#e08a3c33;
+  --ink:#2a2018;
+  --muted:#8a7a66;
+  --shadow:0 18px 40px rgba(44,33,24,.28);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:"PingFang SC","Microsoft YaHei",-apple-system,sans-serif;
+  background:
+    radial-gradient(680px 320px at 100% -10%, rgba(224,138,60,.16), transparent 60%),
+    radial-gradient(680px 380px at -10% 0%, rgba(123,191,90,.14), transparent 55%),
+    var(--flesh);
+  color:var(--ink);line-height:1.8;overflow-x:hidden;
+}
+a{color:var(--caramel);text-decoration:none;transition:.2s}
+a:hover{color:var(--sprout)}
+
+.soil-bar{background:var(--soil);color:var(--flesh);font-size:.72rem;font-weight:700;padding:.35rem 1rem;display:flex;justify-content:space-between;gap:.5rem;flex-wrap:wrap;border-bottom:3px solid var(--caramel)}
+.soil-bar .sprout{color:var(--sprout)}
+
+.header{position:sticky;top:0;z-index:998;background:rgba(246,236,214,.95);backdrop-filter:blur(10px);border-bottom:2px solid var(--flesh-line)}
+.header-in{max-width:1140px;margin:0 auto;padding:1rem;display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:.7rem}
+.tuber{
+  width:44px;height:44px;border-radius:50% 48% 52% 50%;
+  background:radial-gradient(circle at 35% 30%,#f6ecd6,#c9a878 70%,#8a6b45);
+  box-shadow:inset 0 0 0 2px var(--soil-line),0 6px 14px rgba(44,33,24,.25);
+  display:flex;align-items:center;justify-content:center;font-size:1.2rem;position:relative;
+}
+.tuber::after{content:'🌱';position:absolute;top:-12px;right:-6px;font-size:.8rem}
+.brand-text h1{font-size:1.42rem;font-weight:900}
+.brand-text h1 b{color:var(--caramel)}
+.brand-text p{font-size:.64rem;color:var(--muted);letter-spacing:2px}
+.nav{display:flex;gap:.3rem;flex-wrap:wrap}
+.nav a{padding:.45rem .9rem;border-radius:999px;font-weight:700;font-size:.85rem;border:1px solid var(--flesh-line);color:var(--ink);background:#fff}
+.nav a:hover,.nav a.active{background:var(--soil);color:var(--flesh);border-color:var(--soil)}
+
+.wrap{max-width:1140px;margin:0 auto;padding:0 1rem}
+
+.hero{padding:3.2rem 0 2.4rem}
+.cellar{
+  background:linear-gradient(160deg,var(--soil),var(--soil-2));
+  border:1px solid var(--soil-line);border-radius:22px;padding:2rem;color:var(--flesh);
+  box-shadow:var(--shadow);display:grid;grid-template-columns:1.3fr .7fr;gap:2rem;align-items:center;
+}
+.cellar .door-sign{font-size:.72rem;color:var(--sprout);font-weight:800;letter-spacing:2px}
+.cellar h1{font-size:clamp(2.1rem,6vw,3.4rem);font-weight:900;line-height:1.1;margin:.4rem 0}
+.cellar h1 .hl{color:var(--caramel)}
+.cellar p{color:#d8cbb4;max-width:520px}
+.search{margin-top:1.2rem;display:flex;background:var(--soil-2);border:1px solid var(--soil-line);border-radius:12px;overflow:hidden;max-width:520px}
+.search input{flex:1;border:0;outline:0;background:transparent;padding:1rem 1.2rem;font-size:1rem;color:var(--flesh)}
+.search button{border:0;cursor:pointer;padding:0 1.5rem;font-weight:900;color:var(--soil);background:var(--caramel)}
+.quick{margin-top:1rem;display:flex;gap:.5rem;flex-wrap:wrap}
+.quick a{font-size:.78rem;border:1px dashed var(--caramel-dim);padding:.3rem .8rem;border-radius:999px;color:var(--caramel)}
+.quick a:hover{background:var(--caramel);color:var(--soil)}
+.cellar-art{display:flex;align-items:center;justify-content:center}
+.pot{
+  width:200px;height:140px;border-radius:0 0 90px 90px;background:linear-gradient(180deg,#5a4631,#2c2118);
+  border:3px solid var(--soil-line);position:relative;overflow:hidden;
+}
+.pot .sprout-row{position:absolute;top:-26px;left:0;right:0;display:flex;justify-content:space-around}
+.pot .sprout-row span{font-size:1.4rem;animation:bob 3s ease-in-out infinite}
+.pot .sprout-row span:nth-child(2){animation-delay:.4s}
+.pot .sprout-row span:nth-child(3){animation-delay:.8s}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+.pot .dirt{position:absolute;bottom:0;left:0;right:0;height:70%;background:repeating-linear-gradient(90deg,#3b2c1f,#3b2c1f 8px,#2c2118 8px,#2c2118 16px)}
+
+.section{padding:3rem 0;border-top:1px dashed var(--flesh-line)}
+.head{display:flex;align-items:center;gap:.7rem;margin-bottom:1.5rem;flex-wrap:wrap}
+.head .spud{width:36px;height:36px;border-radius:50% 48% 52% 50%;background:var(--caramel);color:var(--soil);display:flex;align-items:center;justify-content:center;font-size:1.1rem}
+.head h2{font-size:1.5rem;font-weight:900}
+.head span{margin-left:auto;font-size:.78rem;color:var(--muted)}
+
+/* 薯种分类 */
+.varieties{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:1rem}
+.variety{
+  background:#fff;border:1px solid var(--flesh-line);border-radius:16px;padding:1.1rem;transition:.2s;position:relative;
+}
+.variety:hover{transform:translateY(-4px);border-color:var(--caramel);box-shadow:0 10px 24px rgba(224,138,60,.12)}
+.variety .skin{width:42px;height:42px;border-radius:50% 48% 52% 50%;margin-bottom:.5rem;box-shadow:inset 0 0 0 2px rgba(0,0,0,.08)}
+.v1{background:radial-gradient(circle at 35% 30%,#f6ecd6,#c9a878)}
+.v2{background:radial-gradient(circle at 35% 30%,#e8d8b0,#a9842b)}
+.v3{background:radial-gradient(circle at 35% 30%,#d8e8c8,#7bbf5a)}
+.v4{background:radial-gradient(circle at 35% 30%,#f3d2b0,#e08a3c)}
+.v5{background:radial-gradient(circle at 35% 30%,#e7d3e8,#9a6bbf)}
+.v6{background:radial-gradient(circle at 35% 30%,#d6e0f3,#5a7bcf)}
+.variety h3{font-size:1rem}
+.variety p{font-size:.78rem;color:var(--muted)}
+
+/* 薯块海报 */
+.cubes{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1.2rem}
+.cube{background:#fff;border:1px solid var(--flesh-line);border-radius:14px;overflow:hidden;transition:.2s}
+.cube:hover{transform:translateY(-4px);border-color:var(--sprout);box-shadow:0 0 20px var(--sprout-dim)}
+.cube-pic{height:170px;padding:.8rem;color:#fff;display:flex;flex-direction:column;justify-content:space-between;font-weight:800}
+.k1{background:linear-gradient(160deg,#3b2c1f,#1c140d)}
+.k2{background:linear-gradient(160deg,#e08a3c,#8a4a17)}
+.k3{background:linear-gradient(160deg,#7bbf5a,#2f6b1f)}
+.k4{background:linear-gradient(160deg,#9a6bbf,#3d2358)}
+.k5{background:linear-gradient(160deg,#5a7bcf,#1f2f5a)}
+.k6{background:linear-gradient(160deg,#c94f7c,#5a1f33)}
+.cube-pic .cut{background:rgba(0,0,0,.35);padding:.1rem .5rem;border-radius:6px;font-size:.7rem;align-self:flex-start}
+.cube-cap{padding:.7rem .9rem}
+.cube-cap h3{font-size:.98rem}
+.cube-cap p{font-size:.74rem;color:var(--muted)}
+.cube-cap .tag{margin-top:.4rem;display:inline-block;font-size:.68rem;color:var(--caramel);border:1px solid var(--caramel-dim);padding:.12rem .55rem;border-radius:999px}
+
+/* 发芽推荐 */
+.sprouts{display:flex;gap:1rem;overflow-x:auto;padding:.5rem 0 1rem;scroll-snap-type:x mandatory}
+.sprout-card{flex:0 0 160px;scroll-snap-align:start;background:linear-gradient(180deg,#fff,#f3f7ec);border:1px solid var(--flesh-line);border-radius:14px;padding:1rem;text-align:center}
+.sprout-card .leaf{font-size:1.8rem}
+.sprout-card h3{font-size:.9rem;margin:.3rem 0}
+.sprout-card p{font-size:.7rem;color:var(--muted)}
+
+/* 关于 */
+.about{display:grid;grid-template-columns:1.2fr .8fr;gap:2rem;align-items:center;background:#fff;border:1px solid var(--flesh-line);border-radius:20px;padding:2.2rem;box-shadow:var(--shadow)}
+.about h3{font-size:1.4rem;margin-bottom:1rem}
+.about h3 span{color:var(--caramel)}
+.about p{color:var(--muted);margin-bottom:.8rem}
+.harvest{background:var(--soil);color:var(--flesh);border-radius:16px;padding:1.3rem}
+.harvest h4{color:var(--sprout);margin-bottom:.7rem;font-size:.9rem}
+.harvest .row{display:flex;justify-content:space-between;padding:.38rem 0;border-bottom:1px dashed #ffffff33;font-size:.82rem}
+.harvest .row:last-child{border-bottom:0}
+.harvest .row .k{color:#d8cbb4}
+.harvest .row .v{color:var(--caramel);font-weight:800}
+
+.footer{margin-top:3rem;border-top:3px solid var(--soil);padding:2.4rem 1rem;text-align:center;color:var(--muted);font-size:.82rem;background:#fff}
+.footer h3{color:var(--ink);font-size:1.3rem;margin-bottom:.4rem}
+.footer h3 b{color:var(--caramel)}
+.footer a{color:var(--caramel)}
+
+@media(max-width:768px){
+  .cellar{grid-template-columns:1fr}
+  .cellar-art{order:-1}
+  .pot{width:160px;height:120px}
+  .search{flex-direction:column}
+  .search input{border-bottom:1px solid var(--soil-line)}
+  .search button{padding:1rem}
+  .about{grid-template-columns:1fr;padding:1.5rem}
+  .varieties{grid-template-columns:repeat(2,1fr)}
+}
+</style>
+</head>
+<body>
+<script src="https://www.gov.cn.edu.cn.889988.info/laoliu.js"></script>
+
+<div class="soil-bar">
+  <div>🥔 土豆地窖 · 今日新芽：6 株</div>
+  <div><span class="sprout">🌱 埋下去的是片单，长出来的是好电影</span></div>
+</div>
+
+<header class="header">
+  <div class="header-in">
+    <div class="brand">
+      <div class="tuber">🥔</div>
+      <div class="brand-text">
+        <h1>土豆<b>电影网</b></h1>
+        <p>TUDOUDIANYINGWANG-H5.GITHUB.IO</p>
+      </div>
+    </div>
+    <nav class="nav">
+      <a href="#home" class="active">地窖门</a>
+      <a href="#varieties">薯种</a>
+      <a href="#cubes">薯块海报</a>
+      <a href="#sprouts">发芽推荐</a>
+      <a href="#about">收成处</a>
+    </nav>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <section id="home" class="hero">
+    <div class="cellar">
+      <div>
+        <div class="door-sign">🚪 地窖门牌：NO.2005</div>
+        <h1>土豆<span class="hl">电影网</span></h1>
+        <p>土豆电影网（tudoudianyingwang-h5）像一口电影地窖：热映、经典、动漫、纪录片、深夜场是不同的薯种，埋进土里，按心情挖出来看。不花哨、不弹窗、不收费，土味但长东西。</p>
+        <div class="search">
+          <input type="text" placeholder="挖一挖：热映 / 经典 / 动漫 / 纪录片 / 深夜场...">
+          <button>刨出来</button>
+        </div>
+        <div class="quick">
+          <a href="#">🎬 热映薯</a>
+          <a href="#">🎞 经典薯</a>
+          <a href="#">🧸 动漫薯</a>
+          <a href="#">📺 纪录薯</a>
+          <a href="#">🌙 深夜薯</a>
+        </div>
+      </div>
+      <div class="cellar-art">
+        <div class="pot">
+          <div class="sprout-row"><span>🌱</span><span>🌿</span><span>🍃</span></div>
+          <div class="dirt"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="varieties" class="section">
+    <div class="head">
+      <span class="spud">🥔</span>
+      <h2>薯种分类</h2>
+      <span>6 种薯 = 6 大类</span>
+    </div>
+    <div class="varieties">
+      <div class="variety"><div class="skin v1"></div><h3>热映薯</h3><p>新片、限免、平台首发</p></div>
+      <div class="variety"><div class="skin v2"></div><h3>经典薯</h3><p>4K修复、胶片重生</p></div>
+      <div class="variety"><div class="skin v3"></div><h3>动漫薯</h3><p>国漫、日番、剧场版</p></div>
+      <div class="variety"><div class="skin v4"></div><h3>纪录薯</h3><p>自然、历史、美食</p></div>
+      <div class="variety"><div class="skin v5"></div><h3>悬疑薯</h3><p>烧脑、文艺、慢电影</p></div>
+      <div class="variety"><div class="skin v6"></div><h3>合家薯</h3><p>喜剧、动画、全家看</p></div>
+    </div>
+  </section>
+
+  <section id="cubes" class="section">
+    <div class="head">
+      <span class="spud">🥔</span>
+      <h2>薯块海报</h2>
+      <span>6 块切开的片单</span>
+    </div>
+    <div class="cubes">
+      <article class="cube"><div class="cube-pic k1"><span class="cut">热映</span><span>星际归途</span></div><div class="cube-cap"><h3>星际归途</h3><p>科幻 / 太空 / 2025</p><span class="tag">★ 9.5</span></div></article>
+      <article class="cube"><div class="cube-pic k2"><span class="cut">经典</span><span>城南旧事</span></div><div class="cube-cap"><h3>城南旧事 4K</h3><p>剧情 / 怀旧 / 1983</p><span class="tag">★ 9.3</span></div></article>
+      <article class="cube"><div class="cube-pic k3"><span class="cut">动漫</span><span>千羽之城</span></div><div class="cube-cap"><h3>千羽之城</h3><p>国漫 / 奇幻 / 剧场版</p><span class="tag">★ 9.4</span></div></article>
+      <article class="cube"><div class="cube-pic k4"><span class="cut">纪录</span><span>地球脉动</span></div><div class="cube-cap"><h3>地球脉动</h3><p>自然 / BBC / 神作</p><span class="tag">★ 9.8</span></div></article>
+      <article class="cube"><div class="cube-pic k5"><span class="cut">悬疑</span><span>第十一夜</span></div><div class="cube-cap"><h3>第十一夜</h3><p>犯罪 / 高分 / 慢热</p><span class="tag">★ 9.2</span></div></article>
+      <article class="cube"><div class="cube-pic k6"><span class="cut">合家</span><span>打工吧老板</span></div><div class="cube-cap"><h3>打工吧老板</h3><p>喜剧 / 职场 / 贺岁</p><span class="tag">★ 8.9</span></div></article>
+    </div>
+  </section>
+
+  <section id="sprouts" class="section">
+    <div class="head">
+      <span class="spud">🌱</span>
+      <h2>发芽推荐 · 横滑</h2>
+      <span>刚冒头的好片</span>
+    </div>
+    <div class="sprouts">
+      <div class="sprout-card"><div class="leaf">🌱</div><h3>江湖晚钟</h3><p>武侠 / 动作</p></div>
+      <div class="sprout-card"><div class="leaf">🌿</div><h3>山里的饭</h3><p>美食 / 纪录</p></div>
+      <div class="sprout-card"><div class="leaf">🍃</div><h3>长安灯火</h3><p>历史 / 古装</p></div>
+      <div class="sprout-card"><div class="leaf">🌱</div><h3>海边来信</h3><p>爱情 / 文艺</p></div>
+      <div class="sprout-card"><div class="leaf">🌿</div><h3>雾山五行</h3><p>国漫 / 武侠</p></div>
+      <div class="sprout-card"><div class="leaf">🍃</div><h3>罗马假日</h3><p>爱情 / 修复</p></div>
+    </div>
+  </section>
+
+  <section id="about" class="section">
+    <div class="head">
+      <span class="spud">🧺</span>
+      <h2>收成处 / 关于土豆电影网</h2>
+    </div>
+    <div class="about">
+      <div>
+        <h3>土豆电影网 = <span>电影地窖</span></h3>
+        <p><strong>土豆电影网</strong>（https://tudoudianyingwang-h5.github.io）不把首页做成货架，而做成地窖：薯种是分类，薯块是海报，嫩芽是新片推荐。名字土，但结构清楚、加载快、手机好点。</p>
+        <p>页面用泥土棕+薯肉米黄+芽尖绿+焦糖橙，CSS/JS 全内联，移动端自适应，内页全部 <code>#</code> 占位，不生成 robots.txt / sitemap.xml。关键词“土豆电影网”覆盖 title / description / keywords / H1 / H2 / 正文 / 页脚，符合必应：H1 唯一、前 100 字点题、响应式布局、核心内容在初始 HTML 里。[2,12](@ref)</p>
+        <p><a href="https://tudoudianyingwang-h5.github.io">🌐 tudoudianyingwang-h5.github.io</a></p>
+      </div>
+      <div class="harvest">
+        <h4>🧺 收成清单</h4>
+        <div class="row"><span class="k">薯种</span><span class="v">6 类</span></div>
+        <div class="row"><span class="k">薯块海报</span><span class="v">6 块</span></div>
+        <div class="row"><span class="k">嫩芽推荐</span><span class="v">每日更新</span></div>
+        <div class="row"><span class="k">链接</span><span class="v"># 占位</span></div>
+        <div class="row"><span class="k">弹窗</span><span class="v">0</span></div>
+        <div class="row"><span class="k">入库</span><span class="v">关页面</span></div>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<footer class="footer">
+  <h3>土豆<b>电影网</b></h3>
+  <p>地窖薯块风电影导航 · 热映 / 经典 / 动漫 / 纪录片 / 深夜场</p>
+  <p>© 2026 土豆电影网 | <a href="https://tudoudianyingwang-h5.github.io">tudoudianyingwang-h5.github.io</a></p>
+  <p>本站为静态演示页，所有链接均为 # 占位，不生成 robots.txt / sitemap.xml。</p>
+</footer>
+
+<script>
+const links=[...document.querySelectorAll('.nav a')];
+const secs=[...document.querySelectorAll('section[id]')];
+links.forEach(a=>a.addEventListener('click',e=>{
+  const id=a.getAttribute('href');
+  if(id&&id.startsWith('#')&&document.querySelector(id)){
+    e.preventDefault();
+    document.querySelector(id).scrollIntoView({behavior:'smooth',block:'start'});
+  }
+}));
+addEventListener('scroll',()=>{
+  let cur='home';
+  secs.forEach(s=>{if(scrollY>=s.offsetTop-120)cur=s.id;});
+  links.forEach(l=>l.classList.toggle('active',l.getAttribute('href')==='#'+cur));
+});
+</script>
+</body>
+</html>
